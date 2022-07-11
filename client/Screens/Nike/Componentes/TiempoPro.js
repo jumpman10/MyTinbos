@@ -7,6 +7,7 @@ import { StyleSheet } from "react-native";
 
 const TiempoPro = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showPhotos, setShowPhotos] = useState(false);
   return (
     <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" style={styles.move} 
    bg = "#114F5A"
@@ -19,16 +20,64 @@ const TiempoPro = () => {
           height={200}
           alt="image" />
         </AspectRatio>
-        <Center bg="#C49450" _dark={{
-        bg: "violet.400"
-      }} _text={{
+        <Button bg="#C49450"  _text={{
         color: "warmGray.50",
         fontWeight: "700",
         fontSize: "xs"
-      }} position="absolute" bottom="0" px="3" py="1.5">
-          PHOTOS
-        </Center>
+      }} borderRadius="0" position="absolute" bottom="0" px="3" py="1.5" onPress={() => setShowPhotos(true)}>
+           PHOTOS 
+        </Button>
+        
       </Box>
+      <Modal isOpen={showPhotos} onClose={() => setShowPhotos(false)} size='full' >
+        <Modal.Content bg="#C49450">
+          <Modal.CloseButton color='white' />
+          <Modal.Body>
+          <Box  rounded="lg" overflow="hidden"  bg= "#114F5A">
+      <Box>
+        <AspectRatio w="100%"  ratio={16 / 9}>
+          <Image 
+          source={require('../assetsCards/tiempopro.png')}
+          width={320}
+          height={200}
+          alt="image" />
+        </AspectRatio>
+      </Box>
+      <Box>
+    
+        <AspectRatio w="280" h="280" ratio={16 / 9} >
+          <Image 
+          source={require('../assetsCards/tiempo91.jpg')}
+          width={280}
+          height={280}
+          alt="image" />
+        </AspectRatio>
+        
+      </Box>
+      <Box>
+        <AspectRatio w="100%"  ratio={16 / 9}>
+          <Image 
+          source={require('../assetsCards/tiempo92.jpg')}
+          width={320}
+          height={200}
+          alt="image" />
+        </AspectRatio>
+      </Box>
+      <Box>
+        <AspectRatio w="100%"  ratio={16 / 9}>
+          <Image 
+          source={require('../assetsCards/tiempo93.jpg')}
+          width={320}
+          height={200}
+          alt="image" />
+        </AspectRatio>
+      </Box>
+    </Box>
+          </Modal.Body>
+          <Modal.Footer bg="#C49450">
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
       <Stack p="4" space={3} bg="#114F5A">
         <Stack space={2}>
           <Heading size="md" ml="-1" color="#F7F8FB">
@@ -59,15 +108,13 @@ const TiempoPro = () => {
           height={200}
           alt="image" />
         </AspectRatio>
-        <Center bg="#C49450" _dark={{
-        bg: "violet.400"
-      }} _text={{
+        <Button bg="#C49450"  _text={{
         color: "warmGray.50",
         fontWeight: "700",
         fontSize: "xs"
-      }} position="absolute" bottom="0" px="3" py="1.5">
-          PHOTOS
-        </Center>
+      }} borderRadius="0" position="absolute" bottom="0" px="3" py="1.5" onPress={() => setShowPhotos(true)}>
+           PHOTOS 
+        </Button>
       </Box>
       <Stack p="4" space={3} bg="#114F5A">
         <Stack space={2}>
