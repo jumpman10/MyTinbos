@@ -1,24 +1,47 @@
 import React from "react";
 import { Box, Heading, AspectRatio,Text,Image, Center, HStack, Stack,Button, Modal,FormControl, Input } from "native-base";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
-
+import { StyleSheet, View, Dimensions,Animated} from "react-native";
+import {
+  PinchGestureHandler,PanGestureHandler,TouchableOpacity
+  } from "react-native-gesture-handler";
+  
+  
+const {width} = Dimensions.get("window");
 
 const Tiempo = () => {
   const [showModal, setShowModal] = useState(false);
   const [showPhotos, setShowPhotos] = useState(false);
+  const[dialog, setDialog] =React.useState(false);
+
+   
+
+  const scale= React.useRef(new Animated.Value(1)).current
+
+ const handlePitch = Animated.event(
+      [{
+          nativeEvent:{scale}
+      }],
+      {useNativeDriver: false}
+  )
+
   return (
     <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" style={styles.move} 
     bg= "#114F5A"
     >
       <Box>
-        <AspectRatio w="100%"  ratio={16 / 9}>
-          <Image 
-          source={require('../assetsCards/niketiempolegend9elitefg.png')}
-          width={320}
-          height={200}
-          alt="image" />
-        </AspectRatio>
+      <TouchableOpacity onPress={() => setDialog(true)}>
+        <View>
+        <AspectRatio w='100%' ratio={16 / 9}>
+          <Image
+            source={require('../assetsCards/niketiempolegend9elitefg.png')}
+            width={320}
+            height={200}
+            alt="image" 
+          />
+          </AspectRatio>
+        </View>
+        </TouchableOpacity>
         <Button bg="#C49450"  _text={{
         color: "warmGray.50",
         fontWeight: "700",
@@ -147,6 +170,30 @@ const Tiempo = () => {
         </Modal.Content>
       </Modal>
       </Stack>
+
+      <View >
+      <Modal  isOpen={dialog} onClose={() => setDialog(false)} size='full' style={[styles.container]} animationType="slide">
+      
+          <Modal.CloseButton color='white' />
+          <Modal.Content maxWidth="100%" maxH="100%">
+          <Modal.Body padding="0" style={[styles.container]}>
+          <View>
+            <PinchGestureHandler onGestureEvent={handlePitch} >
+             <Animated.Image
+            source={require('../assetsCards/niketiempolegend9elitefg.png')}
+            style={[{width:width, transform:[{scale}]} ,styles.img]}
+            alt="image" 
+            />
+           </PinchGestureHandler>
+          </View>
+
+     
+     
+          </Modal.Body>
+          </Modal.Content>
+        
+      </Modal>
+      </View>
     </Box>
   
   

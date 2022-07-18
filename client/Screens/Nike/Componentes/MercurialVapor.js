@@ -1,30 +1,47 @@
 import React from "react";
-import { Box, Heading, AspectRatio,Text,Image, Center,Stack,Button, Modal, Icon,Pressable} from "native-base";
-import { StyleSheet,Animated, PanResponder, View  } from "react-native";
+import { Box, Heading, AspectRatio,Text,Image,Center,Stack,Button, Modal, Icon,Pressable} from "native-base";
+import { StyleSheet, View, Dimensions,Animated} from "react-native";
 import { useState, useRef   }  from "react";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-
-
+import {
+  PinchGestureHandler,PanGestureHandler,TouchableOpacity
+  } from "react-native-gesture-handler";
+  const {width} = Dimensions.get("window");
 const MercurialVapor = () => {
-  const [selected, setSelected] = React.useState(1);
+  const [selected, setSelected] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [showPhotos, setShowPhotos] = useState(false);
   const navigation = useNavigation();
+  const[photo1, setPhoto1] =React.useState(false);
+  const[photo2, setPhoto2] =React.useState(false);
+  const[dialog, setDialog] =React.useState(false);
+  const scale= React.useRef(new Animated.Value(1)).current
+
+ const handlePitch = Animated.event(
+      [{
+          nativeEvent:{scale}
+      }],
+      {useNativeDriver: false}
+  )
+
   return (
     <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" bg= "#114F5A" 
     style={styles.move}>
+      
       <Box>
+      <TouchableOpacity onPress={() => setDialog(true)}>
         <View>
-        <AspectRatio w="100%"  ratio={16 / 9}>
-          <Image 
-          source={require('../assetsCards/MercurialVapor14EliteFG2.png')}
-          width={320}
-          height={200}
-          alt="image" />
-        </AspectRatio>
+        <AspectRatio w='100%' ratio={16 / 9}>
+          <Image
+            source={require('../assetsCards/MercurialVapor14EliteFG2.png')}
+            width={320}
+            height={200}
+            alt="image" 
+          />
+          </AspectRatio>
         </View>
+        </TouchableOpacity>
         <Button bg="#C49450"  _text={{
         color: "warmGray.50",
         fontWeight: "700",
@@ -40,33 +57,46 @@ const MercurialVapor = () => {
           <Modal.Body>
           <Box  rounded="lg" overflow="hidden"  bg= "#114F5A">
       <Box>
-        <AspectRatio w="100%"  ratio={16 / 9}>
-          <Image 
-          source={require('../assetsCards/MercurialVapor14EliteFG2.png')}
-          width={320}
-          height={200}
-          alt="image" />
-        </AspectRatio>
+      <Pressable py="2" onPress={() => setDialog(true)}>
+        <View>
+        <AspectRatio w='100%' ratio={16 / 9}>
+          <Image
+            source={require('../assetsCards/MercurialVapor14EliteFG2.png')}
+            width={320}
+            height={200}
+            alt="image" 
+          />
+          </AspectRatio>
+        </View>
+        </Pressable>
       </Box>
       <Box>
-    
-        <AspectRatio w="280" h="280" ratio={16 / 9} >
-          <Image 
-          source={require('../assetsCards/mercurialvapor1.jpg')}
-          width={280}
+        <Pressable py="2" onPress={() => setPhoto1(true)}>
+        <View>
+        <AspectRatio w="280" h="280" ratio={16 / 9}>
+          <Image
+            source={require('../assetsCards/mercurialvapor1.jpg')}
+            width={280}
           height={280}
-          alt="image" />
-        </AspectRatio>
-        
+            alt="image" 
+          />
+          </AspectRatio>
+        </View>
+        </Pressable>
       </Box>
       <Box>
-        <AspectRatio w="100%"  ratio={16 / 9}>
-          <Image 
-          source={require('../assetsCards/mercurialvapor2.jpg')}
-          width={320}
-          height={200}
-          alt="image" />
-        </AspectRatio>
+      <Pressable py="2" onPress={() => setPhoto2(true)}>
+        <View>
+        <AspectRatio w='100%' ratio={16 / 9}>
+          <Image
+            source={require('../assetsCards/mercurialvapor2.jpg')}
+            width={320}
+            height={200}
+            alt="image" 
+          />
+          </AspectRatio>
+        </View>
+        </Pressable>
       </Box>
       <Box>
         <AspectRatio w="100%"  ratio={16 / 9}>
@@ -159,6 +189,65 @@ La parte superior Flyknit es ligera, transpirable y se estira con el pie para of
         </Modal.Content>
       </Modal>
       </Stack>
+
+      <View >
+      <Modal  isOpen={dialog} onClose={() => setDialog(false)} size='full' style={[styles.container]} animationType="slide">
+      
+          <Modal.CloseButton color='white' />
+          <Modal.Content maxWidth="100%" maxH="100%">
+          <Modal.Body padding="0" style={[styles.container]}>
+          <View>
+            <PinchGestureHandler onGestureEvent={handlePitch} >
+             <Animated.Image
+            source={require('../assetsCards/MercurialVapor14EliteFG2.png')}
+            style={[{width:width, transform:[{scale}]} ,styles.img]}
+            alt="image" 
+            />
+           </PinchGestureHandler>
+          </View>
+          </Modal.Body>
+          </Modal.Content>
+      </Modal>
+      </View>
+
+      <View >
+      <Modal  isOpen={photo1} onClose={() => setPhoto1(false)} size='full' style={[styles.container]} animationType="slide">
+      
+          <Modal.CloseButton color='white' />
+          <Modal.Content maxWidth="100%" maxH="100%">
+          <Modal.Body padding="0" style={[styles.container]}>
+          <View>
+            <PinchGestureHandler onGestureEvent={handlePitch} >
+             <Animated.Image
+            source={require('../assetsCards/mercurialvapor1.jpg')}
+            style={[{width:width, transform:[{scale}]} ,styles.img]}
+            alt="image" 
+            />
+           </PinchGestureHandler>
+          </View>
+          </Modal.Body>
+          </Modal.Content>
+      </Modal>
+      </View>
+      <View >
+      <Modal  isOpen={photo2} onClose={() => setPhoto2(false)} size='full' style={[styles.container]} animationType="slide">
+      
+          <Modal.CloseButton color='white' />
+          <Modal.Content w="100%" maxH="100%">
+          <Modal.Body padding="0" style={[styles.container]}>
+          <View>
+            <PinchGestureHandler onGestureEvent={handlePitch} >
+             <Animated.Image
+            source={require('../assetsCards/mercurialvapor2.jpg')}
+            style={[{width:width, transform:[{scale}]} ]}
+            alt="image" 
+            />
+           </PinchGestureHandler>
+          </View>
+          </Modal.Body>
+          </Modal.Content>
+      </Modal>
+      </View>
     </Box>
   
   
@@ -171,5 +260,14 @@ La parte superior Flyknit es ligera, transpirable y se estira con el pie para of
     const styles = StyleSheet.create({
       move:{
         marginTop:20
+      },
+      img:{
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      container:{
+        justifyContent: "center",
+        alignItems: "center",
       }
+      
     });

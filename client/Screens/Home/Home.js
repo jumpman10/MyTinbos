@@ -15,9 +15,6 @@ function Home(){
       <Cards/>
       </ScrollView>
       </SafeAreaView>
-      <View style={{ height: "8%", width: "100%" }} flex={1} >
-        <Footer />
-      </View>
       </>  
       
     )
