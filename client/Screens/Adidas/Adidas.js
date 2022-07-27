@@ -17,6 +17,8 @@ const Adidas = () => {
       <SafeAreaView style={styles.container}>
       <Navbar/>
       <ScrollView>
+
+      
       <Box alignItems="center">
           <Sense/>
           <Predator/>
