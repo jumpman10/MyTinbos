@@ -1,6 +1,6 @@
 MyTinbos
 
-[![Screenshot-20220718-152612-Expo-Go.jpg](https://i.postimg.cc/FFW5tPgC/Screenshot-20220718-152612-Expo-Go.jpg)](https://postimg.cc/jC7kP41y)
+(https://postimg.cc/jC7kP41y)
 
 [![Screenshot-20220718-152632-Expo-Go.jpg](https://i.postimg.cc/25FM0TSw/Screenshot-20220718-152632-Expo-Go.jpg)](https://postimg.cc/rdsfm1W0)
 
